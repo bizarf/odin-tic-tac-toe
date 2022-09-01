@@ -1,1 +1,18 @@
 @import url(modern-normalize.css);
+
+div {
+    border: 1px solid;
+}
+
+#gameboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    width: 500px;
+    height: 500px;
+}
+
+.boardSquare {
+    font-size: 100px;
+    text-align: center;
+}
