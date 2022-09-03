@@ -1,7 +1,15 @@
 // gameboard
 const gameBoard = (() => {
     // const board = ["X", "O", "X", "X", "X", "X", "X", "O", "O"]
-    const board = new Array(9)
+    const board = new Array(9);
+
+    return {
+        board
+    }
+})();
+
+// handles the display
+const displayController = (() => {
     const boardDisplay = () => {
         const gameBtn = document.getElementsByClassName("boardSquare")
 
@@ -10,13 +18,13 @@ const gameBoard = (() => {
         }
     }
     return {
-        board,
-        boardDisplay,
+        boardDisplay
     }
 })();
 
-// handles the display
-const displayController = (() => {
+// player code
+const players = (() => {
+    // function to let players mark the board
     const playerMove = (player) => {
         const boardSquare = document.querySelectorAll("[data-id]")
         boardSquare.forEach(div => {
@@ -28,36 +36,53 @@ const displayController = (() => {
                     gameBoard.board.splice(div.dataset.id, 1, "O")
                     player = "playerOne"
                 }
-                gameBoard.boardDisplay()
+                displayController.boardDisplay()
+                players.victoryCheck()
             })
-
-            // div.addEventListener("click", () => {
-            //     if (div.textContent === "") {
-            //         gameBoard.board.splice(div.dataset.id, 1, "X")
-            //     } else if (div.textContent === "X") {
-            //         console.log("test")
-            //         console.log(player)
-            //     }
-            //     gameBoard.boardDisplay()
-            // })
         })
     }
+
+    // victory checker
+    const victoryCheck = (() => {
+        const _victoryConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ]
+
+        for (let i = 0; i < 8; i++) {
+            const victoryCombo = _victoryConditions[i]
+            let a = gameBoard.board[victoryCombo[0]];
+            let b = gameBoard.board[victoryCombo[1]];
+            let c = gameBoard.board[victoryCombo[2]];
+
+            if (a === undefined || b === undefined || c === undefined) {
+                continue;
+            }
+
+            if (a === b && b === c) {
+                let resultText = document.querySelector("#result")
+                if (a === "X") {
+                    resultText.textContent = "X wins"
+                } else if (a === "O") {
+                    resultText.textContent = "O wins"
+                }
+                break
+            }
+        }
+    })
     return {
         playerMove,
+        victoryCheck
     }
-})();
-
-// player code
-const players = (() => {
-    const player = () => {
-
-        return {
-            player
-        }
-    }
-})
+})()
 
 // console.log(gameBoard.board)
-gameBoard.boardDisplay();
+displayController.boardDisplay();
 
-displayController.playerMove("playerOne")
+players.playerMove("playerOne")
