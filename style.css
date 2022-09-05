@@ -1,18 +1,85 @@
 @import url(modern-normalize.css);
 
-div {
+/* div {
     border: 1px solid;
+} */
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#header {
+    grid-column: 1 / -1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    /* height: 20px; */
+    background-color: #fbbf24;
+}
+
+h1 {
+    margin: 5px;
 }
 
 #gameboard {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid;
 }
 
 .boardSquare {
+    display: flex;
     font-size: 100px;
     text-align: center;
+    cursor: pointer;
+    user-select: none;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+}
+
+#game-container {
+    text-align: center;
+    /* padding-top: 10px; */
+}
+
+#result {
+    height: 10px;
+    margin-top: 10px;
+}
+
+.gameBtns {
+    padding: 10px 20px;
+    margin: 20px 10px;
+}
+
+#playerOneInfo,
+#playerTwoInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.playerAvatars {
+    font-size: 80px;
+    margin-top: 0;
+    /* border: 1px solid; */
+    width: 80px;
+    text-align: center;
+
+}
+
+input[type="text"] {
+    padding: 5px;
+}
+
+.playerAvatars.currentTurn {
+    box-shadow: 0 0 10px #38bdf8;
 }
